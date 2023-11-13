@@ -2,6 +2,7 @@ package com.turing.alan.pokemonotravezconfragmentos.ui.list
 
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,6 +11,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
+import androidx.recyclerview.widget.ListAdapter
 import com.turing.alan.pokemonotravezconfragmentos.data.api.PokemonApiModel
 import com.turing.alan.pokemonotravezconfragmentos.data.model.Pokemon
 import com.turing.alan.pokemonotravezconfragmentos.databinding.FragmentPokemonListBinding
@@ -34,13 +36,11 @@ class PokemonListFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        val observer = Observer<Pokemon> {
-            binding.pokemonIdText.text = it.id.toString()
-            binding.pokemonNameText.text = it.name
+        val adapter = PokemonListAdapter()
+        binding.pokemonList.adapter = adapter
+        val observer = Observer<List<Pokemon>> {
+            adapter.submitList(it)
         }
-
         viewModel.pokemonUi.observe(viewLifecycleOwner,observer)
     }
 }
