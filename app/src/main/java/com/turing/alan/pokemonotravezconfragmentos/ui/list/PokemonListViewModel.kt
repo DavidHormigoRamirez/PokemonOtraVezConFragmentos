@@ -19,8 +19,7 @@ class PokemonListViewModel(): ViewModel() {
         _pokemonUi.value = it.map { m ->
             Pokemon(m.id,
                 m.name,
-                m.sprites.frontDefault,
-                m.sprites.other.officialArtwork.frontDefault)
+                m.front)
         }
     }
 

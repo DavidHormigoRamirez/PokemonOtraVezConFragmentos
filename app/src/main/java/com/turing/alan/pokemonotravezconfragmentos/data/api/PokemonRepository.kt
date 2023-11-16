@@ -13,7 +13,7 @@ interface  PokemonApi {
     @GET("api/v2/pokemon/")
     suspend fun getAllPokemon():PokemonListResponse
     @GET("api/v2/pokemon/{name}/")
-    suspend fun fetchPokemon(@Path("name") id:String):PokemonApiModel
+    suspend fun fetchPokemon(@Path("name") id:String):PokemonDetailResponse
 }
 
 
@@ -43,12 +43,12 @@ class PokemonRepository private constructor(private val api:PokemonApi) {
         Log.d("DAVID",pokemonListResponse.toString())
         val pokemonList: List<PokemonApiModel> = pokemonListResponse.results.map {
             val pokemonDetail = api.fetchPokemon(it.name)
-            pokemonDetail
-            /*PokemonApiModel(pokemonDetail.id,
+            PokemonApiModel(pokemonDetail.id,
                 pokemonDetail.name,
                 pokemonDetail.weight,
                 pokemonDetail.height,
-                pokemonDetail.sprites)*/
+                pokemonDetail.sprites.frontDefault)
+
         }
         Log.d("DAVID",pokemonList.toString())
         _pokemon.value = pokemonList

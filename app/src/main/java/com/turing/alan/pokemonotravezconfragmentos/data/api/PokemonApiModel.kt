@@ -7,7 +7,7 @@ data class PokemonApiModel(
     val name:String,
     val weight:Int,
     val height:Int,
-    val sprites:Sprites
+    val front:String
 )
 data class Sprites(
     @SerializedName("front_default")
@@ -30,4 +30,12 @@ data class PokemonListItemResponse(
 )
 data class PokemonListResponse(
     val results:List<PokemonListItemResponse>
+)
+
+data class PokemonDetailResponse(
+    val id:Int,
+    val name:String,
+    val weight:Int,
+    val height:Int,
+    val sprites:Sprites
 )

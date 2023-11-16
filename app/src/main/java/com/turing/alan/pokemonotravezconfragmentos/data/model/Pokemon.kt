@@ -4,5 +4,4 @@ import com.turing.alan.pokemonotravezconfragmentos.data.api.OfficialArtwork
 
 data class Pokemon(val id:Int,
     val name:String,
-    val frontImageUrl:String,
-    val officialArtworkUrl: String)
+    val frontImageUrl:String)
