@@ -1,6 +1,5 @@
 package com.turing.alan.pokemonotravezconfragmentos.data.api
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import retrofit2.Retrofit
@@ -40,7 +39,6 @@ class PokemonRepository private constructor(private val api:PokemonApi) {
 
     suspend fun fetch() {
         val pokemonListResponse = api.getAllPokemon()
-        Log.d("DAVID",pokemonListResponse.toString())
         val pokemonList: List<PokemonApiModel> = pokemonListResponse.results.map {
             val pokemonDetail = api.fetchPokemon(it.name)
             PokemonApiModel(pokemonDetail.id,
@@ -50,7 +48,6 @@ class PokemonRepository private constructor(private val api:PokemonApi) {
                 pokemonDetail.sprites.frontDefault)
 
         }
-        Log.d("DAVID",pokemonList.toString())
         _pokemon.value = pokemonList
     }
 
